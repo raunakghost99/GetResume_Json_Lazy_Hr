@@ -1,5 +1,6 @@
 variable "lambda_role_name" {}
 variable "function_name" {}
+variable "function_name_2" {}
 variable "lambda_role_arn" {}
 variable "dynamodb_table_name" {}
 variable "cloudwatch_policy_attachment_arn" {}

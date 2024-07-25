@@ -17,6 +17,7 @@ module "lambda_function" {
   source                         = "./modules/lambda_function"
   lambda_role_name               = module.iam.lambda_role_name
   function_name                  = var.function_name
+  function_name_2 =  var.function_name_2
   lambda_role_arn                = module.iam.lambda_role_arn
   dynamodb_table_name            = module.dynamo_db.dynamodb_table_name
   dynamodb_policy_attachment_arn = module.iam.dynamodb_policy_attachment_arn

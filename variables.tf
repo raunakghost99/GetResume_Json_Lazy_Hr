@@ -3,4 +3,5 @@ variable "lambda_policy_name" {}
 variable "name_dynamodb" {}
 variable "project_name" {}
 variable "function_name" {}
+variable "function_name_2" {}
 variable "region" {}

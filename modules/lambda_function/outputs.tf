@@ -13,3 +13,7 @@ output "lambda_url" {
 output "lambda_function_name" {
   value = aws_lambda_function.resume_lambda_function.function_name
 }
+
+output "lambda_function_name_2"{
+value = aws_lambda_function.resume_post_function.function_name 
+}
