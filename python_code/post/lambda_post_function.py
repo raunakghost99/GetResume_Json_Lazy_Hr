@@ -20,7 +20,7 @@ def lambda_handler(event, context):
         data = json.loads(event['body'])
         # Validate the JSON data
         validate(instance=data, schema=schema)
-        dynamodb.put_item(TableName = table_name, Item = data,primary_key = data['id'])
+        dynamodb.put_item(TableName = table_name, Item = data,primary_key = 'id')
         return {
             'statusCode': 200,
             'body': json.dumps({'message': 'Successfully uploaded data to DynamoDB',id : data['id']})
