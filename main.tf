@@ -31,5 +31,6 @@ module "api_gateway" {
   resume_lambda_invoke_arn = module.lambda_function.resume_lambda_invoke_arn
   lambda_function_name     = module.lambda_function.lambda_function_name
   region                   = var.region
+  lambda_function_name_2   = var.function_name_2
   
 }
