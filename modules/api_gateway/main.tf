@@ -4,19 +4,6 @@ resource "aws_api_gateway_rest_api" "resume_api" {
   name        = "resume_api"
   description = "API Gateway for Resume API"
 }
-/*
-resource "aws_api_gateway_rest_api" "resume_api_post" {
-  name        = "resume_api_post"
-  description = "API Gateway for storing Resume "
-}
-*/
-/*
-resource "aws_api_gateway_resource" "proxy" {
-  rest_api_id = aws_api_gateway_rest_api.resume_api_post.id
-  parent_id   = aws_api_gateway_rest_api.resume_api_post.root_resource_id
-  path_part   = "{proxy+}"
-}
-*/
 
 
 resource "aws_api_gateway_resource" "resume_resource" {
@@ -64,15 +51,6 @@ resource "aws_lambda_permission" "api_gateway_permission" {
   principal     = "apigateway.amazonaws.com"
    source_arn = "arn:aws:execute-api:${var.region}:${data.aws_caller_identity.current.account_id}:${aws_api_gateway_rest_api.resume_api.id}/*/${aws_api_gateway_method.resume_method.http_method}${aws_api_gateway_resource.resume_resource.path}"
 }
-
-resource "aws_lambda_permission" "api_gateway_post_permission" {
-  statement_id  = "AllowAPIGatewayInvoke"
-  action        = "lambda:InvokeFunction"
-  function_name = var.lambda_function_name
-  principal     = "apigateway.amazonaws.com"
-   source_arn = "arn:aws:execute-api:${var.region}:${data.aws_caller_identity.current.account_id}:${aws_api_gateway_rest_api.resume_api.id}/*/${aws_api_gateway_method.post.http_method}${aws_api_gateway_resource.resume_resource.path}"
-}
-
 
 resource "aws_api_gateway_deployment" "resume_api_deployment" {
   rest_api_id = aws_api_gateway_rest_api.resume_api.id
