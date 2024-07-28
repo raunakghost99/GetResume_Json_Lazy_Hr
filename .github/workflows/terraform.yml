@@ -58,18 +58,14 @@ jobs:
       run: terraform plan 
 
       # On push to "main", build or change infrastructure according to Terraform configuration files
-    #- name: Terraform Apply
-    #  run: terraform apply -auto-approve
+    - name: Terraform Apply
+      run: terraform apply -auto-approve
 
     - name: Upload Lambda deployment package
       uses: actions/upload-artifact@v2
       with:
-          name: lambda-function
-          path: function.zip
+          name: resume_challenge_post_function
+          path: resume_cloud_api_challenge_post.zip
 
     - name: Deploy to AWS Lambda
-      env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: 'ca-central-1'
       run: aws lambda update-function-code --function-name resume_challenge_post_function --zip-file fileb://resume_cloud_api_challenge_post.zip
