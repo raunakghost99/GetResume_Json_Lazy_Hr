@@ -71,5 +71,5 @@ jobs:
       env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: 'us-west-2'
+          AWS_REGION: 'ca-central-1'
       run: aws lambda update-function-code --function-name resume_challenge_post_function --zip-file fileb://resume_cloud_api_challenge_post.zip
