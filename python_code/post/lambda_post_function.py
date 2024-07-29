@@ -12,7 +12,7 @@ def lambda_handler(event, context):
         # Parse the JSON data from the API Gateway event
         data = json.loads(event['body'])
         table = dynamodb.Table(table_name)
-        resume_string = data.get('resume', {})
+        resume_string = json.dumps(data.get('resume', {}))
         resume_id = data.get('resumeId')
         # Construct the item to be inserted with only the 'resume' attribute
         item = {
