@@ -38,7 +38,6 @@ Before you begin, ensure you have met the following requirements:
 #### 2. Create a JSON Resume
 
 - Create a JSON file containing your resume data. Follow a schema [Here](https://jsonresume.org/schema)
-- Store as json format to give it to the post function through either postman or any other tool 
 
 #### 3. Create Terraform Configuration
 
@@ -51,4 +50,24 @@ Before you begin, ensure you have met the following requirements:
 #### 5. Test the API
 
 - **API Gateway URL**: Test your endpoint to ensure it returns the resume data in JSON format (the one generated after executing the terraform setup) using `curl`.
-- **GitHub Actions**: Make a change to your code, push to the repository, and verify that the GitHub Actions workflow deploys the updated Lambda function.
+
+##### Extra Features 
+
+- Use post functionallity to upload your own resume to my dynamo db and view it using the get functionality 
+
+#Get functionallity uses a query parameter
+resumeId = id given 
+
+I know this code has a lot of vulnerablities but the post function is not meant to be in this state for more than a few days 
+
+### Using the post functionality 
+
+_Add a Header_ 
+
+Content-Type = application/json
+
+The body will be raw json and the structure should be as follows 
+{
+    "resumeId" = "admin123",
+    "resume" = ""
+}
