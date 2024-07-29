@@ -3,10 +3,15 @@ resource "aws_dynamodb_table" "resume_table" {
   billing_mode   = "PROVISIONED"
   read_capacity  = 5
   write_capacity = 5
-  hash_key       = "resume"
+  hash_key       = "resumeId"
 
   attribute {
     name = "resume"
+    type = "M"
+  }
+
+  attribute {
+    name = "resumeId"
     type = "S"
   }
   tags = {

@@ -1,6 +1,5 @@
 
 import json
-from attr import validate
 import boto3
 from boto3.dynamodb.conditions import Key
 
@@ -48,15 +47,16 @@ def format_json_response(item):
 
 def lambda_handler(event, context):
     query_params = event.get('queryStringParameters', {})
-    id_param = query_params.get('id', None)
+    id_param = query_params.get('resumeId')
     try:
         response = table.get_item(
             Key={
-                'id': id_param
+                'resumeId': id_param
             }
         )
         item = response['Item']
-        formatted_response = format_json_response(item)
+        resume_data = item.get('resume')
+        formatted_response = format_json_response(resume_data)
         return {
             'statusCode': 200,
             'headers': {
