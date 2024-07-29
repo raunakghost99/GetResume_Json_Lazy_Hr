@@ -6,11 +6,6 @@ resource "aws_dynamodb_table" "resume_table" {
   hash_key       = "resumeId"
 
   attribute {
-    name = "resume"
-    type = "S"
-  }
-
-  attribute {
     name = "resumeId"
     type = "S"
   }
