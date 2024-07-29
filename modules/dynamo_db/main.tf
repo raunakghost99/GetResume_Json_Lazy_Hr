@@ -7,7 +7,7 @@ resource "aws_dynamodb_table" "resume_table" {
 
   attribute {
     name = "resume"
-    type = "M"
+    type = "S"
   }
 
   attribute {
