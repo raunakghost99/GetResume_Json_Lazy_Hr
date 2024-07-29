@@ -13,7 +13,7 @@ def lambda_handler(event, context):
         data = json.loads(event['body'])
         table = dynamodb.Table(table_name)
         resume_string = json.dumps(data.get('resume', {}))
-        resume_id = data.get('resumeId')
+        resume_id = data.get('resumeId',{})
         # Construct the item to be inserted with only the 'resume' attribute
         item = {
             'resumeId' : resume_id,
@@ -22,7 +22,7 @@ def lambda_handler(event, context):
         response = table.put_item(Item = item)
         return {
             'statusCode': 200,
-            'body': json.dumps({'message': 'Successfully uploaded data to DynamoDB',id : data['id']})
+            'body': json.dumps({'message': 'Successfully uploaded data to DynamoDB'})
         }
     
     except json.JSONDecodeError:
