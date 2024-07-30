@@ -5,7 +5,7 @@ This project is for the cloud resume challenge api and this readme  will guide y
 
 ## Overview
 
-This project automates the deployment of all infrastructure using terraform runnign on GitHub Actions. The Lambda function serves as the backend for a resume API, providing endpoints via api gateway to fetch resume details stored in a dynamoDB table .
+This project automates the deployment of all infrastructure using terraform running on GitHub Actions. The Lambda function serves as the backend for a resume API, providing endpoints via api gateway to fetch resume details stored in a dynamoDB table .
 
 ## Architecture
 
@@ -33,7 +33,7 @@ Before you begin, ensure you have met the following requirements:
 #### 1. Set Up AWS
 
 - **Sign Up for AWS**: If you don't already have an AWS account, sign up at [aws.amazon.com](https://aws.amazon.com/).
-- **Set Up Credentials**: Configure your AWS CLI with your credentials using `aws configure`.
+- **Set Up Credentials**: Configure your access key id and secrets on github secrets.
 
 #### 2. Create a JSON Resume
 
@@ -45,7 +45,7 @@ Before you begin, ensure you have met the following requirements:
 
 #### 4. Set Up GitHub Actions
 
-- Create a GitHub Actions workflow (`.github/workflows/terraform.yml`) to automatically deploy infrastructure to your aws cloud on every push to the repository.Also put your aws keys and secrets in github to deploy the infrastructure.
+- Create a GitHub Actions workflow (`.github/workflows/terraform.yml`) to automatically deploy infrastructure to your aws cloud on every push might want to change that as it does throw errors if infra already exists.Also put your aws keys and secrets in github to deploy the infrastructure.
 
 #### 5. Test the API
 
