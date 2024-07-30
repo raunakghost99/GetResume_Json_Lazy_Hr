@@ -84,4 +84,4 @@ The body will be raw json and the structure should be as follows
 
 ## Sample Body Screenshot 
 
-![Headers](./post_sccreenshot_body.png)
+![Headers](./post_screenshot_body.png)
