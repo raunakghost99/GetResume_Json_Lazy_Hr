@@ -49,7 +49,13 @@ Before you begin, ensure you have met the following requirements:
 
 #### 5. Test the API
 
-- **API Gateway URL**: Test your endpoint to ensure it returns the resume data in JSON format (the one generated after executing the terraform setup) using `curl`.
+
+To test the API, send a GET request to the API URL:
+``` bash
+ curl https://bwb471csz6.execute-api.ca-central-1.amazonaws.com/test/data?resumeId=RaunakBhargava 
+
+ ```
+
 
 ##### Extra Features 
 
@@ -71,3 +77,11 @@ The body will be raw json and the structure should be as follows
     "resumeId" = "admin123",
     "resume" = ""
 }
+
+## Sample Header screenshot 
+
+![Headers](./headers_psot_request.png)
+
+## Sample Body Screenshot 
+
+![Headers](./post_sccreenshot_body.png)
