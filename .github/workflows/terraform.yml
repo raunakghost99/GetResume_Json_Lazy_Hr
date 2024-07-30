@@ -1,0 +1,71 @@
+# This workflow installs the latest version of Terraform CLI and configures the Terraform CLI configuration file
+# with an API token for Terraform Cloud (app.terraform.io). On pull request events, this workflow will run
+# `terraform init`, `terraform fmt`, and `terraform plan` (speculative plan via Terraform Cloud). On push events
+# to the "main" branch, `terraform apply` will be executed.
+#
+# Documentation for `hashicorp/setup-terraform` is located here: https://github.com/hashicorp/setup-terraform
+#
+
+## This workflow installs the latest version of Terraform CLI and configures the Terraform CLI configuration file
+# with an API token for Terraform Cloud (app.terraform.io). On pull request events, this workflow will run
+# `terraform init`, `terraform fmt`, and `terraform plan` (speculative plan via Terraform Cloud). On push events
+# to the "main" branch, `terraform apply` will be executed.
+
+
+name: 'Terraform'
+
+on:
+  push:
+    branches: [ "dev" ]
+  
+
+permissions:
+  contents: read
+
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCES_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ca-central-1
+      
+    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+    - name: Terraform Init
+      run: terraform init
+      
+    # Generates an execution plan for Terraform
+    - name: Terraform Plan
+      run: terraform plan 
+
+      # On push to "main", build or change infrastructure according to Terraform configuration files
+    - name: Terraform Apply
+      run: terraform apply -auto-approve
+
+    - name: Upload Lambda deployment package
+      uses: actions/upload-artifact@v2
+      with:
+          name: resume_challenge_post_function
+          path: resume_cloud_api_challenge_post.zip
+
+    - name: Deploy to AWS Lambda
+      run: aws lambda update-function-code --function-name resume_challenge_post_function --zip-file fileb://resume_cloud_api_challenge_post.zip
